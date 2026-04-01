@@ -33,8 +33,8 @@ namespace person_wpf_demo_tests
         {
             var persons = new List<Person>
             {
-                new Person { Id = 1, Prenom = "John", Nom = "Doe", DateNaissance = new DateTime(1990, 1, 1), Adresses = new List<Address>() },
-                new Person { Id = 2, Prenom = "Jane", Nom = "Doe", DateNaissance = new DateTime(1992, 2, 2), Adresses = new List<Address>() }
+                new Person { Id = 1, FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1), Addresses = new List<Address>() },
+                new Person { Id = 2, FirstName = "Jane", LastName = "Doe", BirthDate = new DateTime(1992, 2, 2), Addresses = new List<Address>() }
             };
 
             _personServiceMock
@@ -51,7 +51,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Delete_with_selected_person_calls_remove()
         {
-            var selectedPerson = new Person { Id = 10, Prenom = "John", Nom = "Doe", Adresses = new List<Address>() };
+            var selectedPerson = new Person { Id = 10, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
             _viewModel.SelectedPerson = selectedPerson;
 
             _viewModel.DeleteCommand.Execute(null);
@@ -72,7 +72,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Navigate_to_new_address_with_selected_person_calls_navigation_service_with_person_parameter()
         {
-            var selectedPerson = new Person { Id = 20, Prenom = "John", Nom = "Doe", Adresses = new List<Address>() };
+            var selectedPerson = new Person { Id = 20, FirstName = "John", LastName = "Doe", Addresses = new List<Address>() };
             _viewModel.SelectedPerson = selectedPerson;
 
             _viewModel.NavigateToNewAddressViewCommand.Execute(null);

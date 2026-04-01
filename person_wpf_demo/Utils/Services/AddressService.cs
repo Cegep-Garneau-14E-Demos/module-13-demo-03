@@ -20,7 +20,7 @@ namespace person_wpf_demo.Utils.Services
 
         public void Add(Person person, Address newAddress)
         {
-            person.Adresses.Add(newAddress);
+            person.Addresses.Add(newAddress);
             _personDAL.Update(person);
         }
     }

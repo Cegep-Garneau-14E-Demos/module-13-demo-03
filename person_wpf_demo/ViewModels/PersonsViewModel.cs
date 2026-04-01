@@ -32,7 +32,7 @@ namespace person_wpf_demo.ViewModels
             }
         }
 
-        public int AddressCount => SelectedPerson?.Adresses?.Count ?? 0;
+        public int AddressCount => SelectedPerson?.Addresses?.Count ?? 0;
 
         public ICommand DeleteCommand { get; set; }
         public ICommand NavigateToNewAddressViewCommand { get; set; }

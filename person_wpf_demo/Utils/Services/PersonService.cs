@@ -44,13 +44,13 @@ namespace person_wpf_demo.Utils.Services
         private void ValidatePerson(Person person)
         {
             var nameRegex = new Regex("^[a-zA-Z]{2,}$");
-            if (!nameRegex.IsMatch(person.Prenom))
+            if (!nameRegex.IsMatch(person.FirstName))
             {
-                throw new ArgumentException("Le prénom doit contenir au moins 2 caractères alphabétiques.");
+                throw new ArgumentException("First name must contain at least 2 alphabetic characters.");
             }
-            if (!nameRegex.IsMatch(person.Nom))
+            if (!nameRegex.IsMatch(person.LastName))
             {
-                throw new ArgumentException("Le nom doit contenir au moins 2 caractères alphabétiques.");
+                throw new ArgumentException("Last name must contain at least 2 alphabetic characters.");
             }
         }
     }

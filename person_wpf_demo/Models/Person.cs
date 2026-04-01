@@ -3,9 +3,9 @@
     public class Person
     {
         public int Id { get; set; }
-        public string Prenom { get; set; }
-        public string Nom { get; set; }
-        public DateTime DateNaissance { get; set; }
-        public List<Address> Adresses { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public List<Address> Addresses { get; set; }
     }
 }

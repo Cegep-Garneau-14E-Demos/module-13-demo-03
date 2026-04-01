@@ -77,9 +77,9 @@ namespace person_wpf_demo.ViewModels
         {
             var newAddress = new Address
             {
-                Rue = Street,
-                Ville = City,
-                CodePostal = PostalCode,
+                Street = Street,
+                City = City,
+                PostalCode = PostalCode,
                 PersonId = _selectedPerson.Id
             };
 
@@ -97,7 +97,7 @@ namespace person_wpf_demo.ViewModels
             ClearErrors(propertyName);
             if (string.IsNullOrEmpty(value))
             {
-                AddError(propertyName, $"{propertyName} est requis.");
+                AddError(propertyName, $"{propertyName} is required.");
             }
             OnPropertyChanged(nameof(ErrorMessages));
         }

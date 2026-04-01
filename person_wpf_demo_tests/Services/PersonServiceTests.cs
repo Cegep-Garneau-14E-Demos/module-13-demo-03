@@ -24,7 +24,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Adding_a_valid_person_calls_save()
         {
-            var person = new Person { Prenom = "John", Nom = "Doe", DateNaissance = new DateTime(1990, 1, 1) };
+            var person = new Person { FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
 
             _personService.Add(person);
 
@@ -34,7 +34,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Adding_a_person_with_invalid_firstname_throws_exception()
         {
-            var person = new Person { Prenom = "J", Nom = "Doe", DateNaissance = new DateTime(1990, 1, 1) };
+            var person = new Person { FirstName = "J", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
 
             Assert.That(() => _personService.Add(person), Throws.ArgumentException);
         }
@@ -42,7 +42,7 @@ namespace person_wpf_demo_tests
         [Test]
         public void Adding_a_person_with_invalid_lastname_throws_exception()
         {
-            var person = new Person { Prenom = "John", Nom = "D", DateNaissance = new DateTime(1990, 1, 1) };
+            var person = new Person { FirstName = "John", LastName = "D", BirthDate = new DateTime(1990, 1, 1) };
 
             Assert.That(() => _personService.Add(person), Throws.ArgumentException);
         }
@@ -64,22 +64,22 @@ namespace person_wpf_demo_tests
         {
             var persons = new List<Person>
             {
-                new Person { Prenom = "John", Nom = "Doe", DateNaissance = new DateTime(1990, 1, 1) },
-                new Person { Prenom = "Jane", Nom = "Doe", DateNaissance = new DateTime(1992, 2, 2) }
+                new Person { FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) },
+                new Person { FirstName = "Jane", LastName = "Doe", BirthDate = new DateTime(1992, 2, 2) }
             };
             _personDAL_Mock.Setup(repo => repo.GetAll()).Returns(persons);
 
             var result = _personService.FindAll();
 
             Assert.That(result.Count(), Is.EqualTo(2));
-            Assert.That(result.First().Prenom, Is.EqualTo("John"));
-            Assert.That(result.Last().Prenom, Is.EqualTo("Jane"));
+            Assert.That(result.First().FirstName, Is.EqualTo("John"));
+            Assert.That(result.Last().FirstName, Is.EqualTo("Jane"));
         }
 
         [Test]
         public void Removing_a_valid_person_calls_delete()
         {
-            var person = new Person { Prenom = "John", Nom = "Doe", DateNaissance = new DateTime(1990, 1, 1) };
+            var person = new Person { FirstName = "John", LastName = "Doe", BirthDate = new DateTime(1990, 1, 1) };
 
             _personService.Remove(person);
 

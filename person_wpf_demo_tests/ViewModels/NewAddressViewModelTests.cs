@@ -34,9 +34,9 @@ namespace person_wpf_demo_tests
             _addressServiceMock.Verify(service => service.Add(
                 person,
                 It.Is<Address>(address =>
-                    address.Rue == "Candy Lane" &&
-                    address.Ville == "North Pole" &&
-                    address.CodePostal == "H0H0H0" &&
+                    address.Street == "Candy Lane" &&
+                    address.City == "North Pole" &&
+                    address.PostalCode == "H0H0H0" &&
                     address.PersonId == 42)),
                 Times.Once);
 

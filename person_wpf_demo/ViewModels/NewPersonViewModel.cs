@@ -133,16 +133,16 @@ namespace person_wpf_demo.ViewModels
 
             var person = new Person
             {
-                Prenom = FirstName,
-                Nom = LastName,
-                DateNaissance = DateOfBirth ?? DateTime.MinValue,
-                Adresses = new List<Address>
+                FirstName = FirstName,
+                LastName = LastName,
+                BirthDate = DateOfBirth ?? DateTime.MinValue,
+                Addresses = new List<Address>
                 {
                     new Address
                     {
-                        Rue = Street,
-                        Ville = City,
-                        CodePostal = PostalCode
+                        Street = Street,
+                        City = City,
+                        PostalCode = PostalCode
                     }
                 }
             };
@@ -184,11 +184,11 @@ namespace person_wpf_demo.ViewModels
         {
             if (firstName.Empty())
             {
-                AddError(propertyName, "Le prénom est requis.");
+                AddError(propertyName, "First name is required.");
             }
             else if (firstName.Length < 2)
             {
-                AddError(propertyName, "Le prénom doit contenir au moins 2 caractères.");
+                AddError(propertyName, "First name must contain at least 2 characters.");
             }
         }
 
@@ -196,11 +196,11 @@ namespace person_wpf_demo.ViewModels
         {
             if (lastName.Empty())
             {
-                AddError(propertyName, "Le nom est requis.");
+                AddError(propertyName, "Last name is required.");
             }
             else if (lastName.Length < 2)
             {
-                AddError(propertyName, "Le nom doit contenir au moins 2 caractères.");
+                AddError(propertyName, "Last name must contain at least 2 characters.");
             }
         }
 
@@ -208,7 +208,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (dateOfBirth == DateTime.MinValue)
             {
-                AddError(propertyName, "La date de naissance est requise.");
+                AddError(propertyName, "Birth date is required.");
             }
         }
 
@@ -216,7 +216,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (street.Empty())
             {
-                AddError(propertyName, "La rue est requise.");
+                AddError(propertyName, "Street is required.");
             }
         }
 
@@ -224,7 +224,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (city.Empty())
             {
-                AddError(propertyName, "La ville est requise.");
+                AddError(propertyName, "City is required.");
             }
         }
 
@@ -232,13 +232,13 @@ namespace person_wpf_demo.ViewModels
         {
             if (postalCode.Empty())
             {
-                AddError(propertyName, "Le code postal est requis.");
+                AddError(propertyName, "Postal code is required.");
             }
         }
 
         private void AddUnknownError(string propertyName)
         {
-            AddError(propertyName, "Une erreur inconnue est survenue.");
+            AddError(propertyName, "An unknown error occurred.");
         }
     }
 }
