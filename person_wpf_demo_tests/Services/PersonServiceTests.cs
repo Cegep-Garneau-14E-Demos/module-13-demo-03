@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using person_wpf_demo.Models.DAL.Interfaces;
 using person_wpf_demo.Utils.Services;
+using person_wpf_demo.Utils.Services.Interfaces;
 
 namespace person_wpf_demo_tests
 {
     public class PersonServiceTests
     {
         private Mock<IPersonDAL> _personDAL_Mock;
-        private PersonService _personService;
+        private IPersonService _personService;
 
         [SetUp]
         public void Setup()

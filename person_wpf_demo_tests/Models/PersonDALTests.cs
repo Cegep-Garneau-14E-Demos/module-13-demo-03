@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using person_wpf_demo.Models.DAL;
+using person_wpf_demo.Models.DAL.Interfaces;
 
 namespace person_wpf_demo_tests
 {
     public class PersonDALTests
     {
         private ApplicationDbContext _dbContext;
-        private PersonDAL _personDAL;
+        private IPersonDAL _personDAL;
 
         [SetUp]
         public void Setup()
