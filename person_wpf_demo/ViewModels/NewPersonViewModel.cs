@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using person_wpf_demo.Models;
 using person_wpf_demo.Utils;
@@ -147,8 +148,16 @@ namespace person_wpf_demo.ViewModels
                 }
             };
 
-            _personService.Add(person);
-            _navigationService.NavigateTo<PersonsViewModel>();
+            try
+            {
+                _personService.Add(person);
+                _navigationService.NavigateTo<PersonsViewModel>();
+            }
+            catch (ArgumentException ex)
+            {
+                AddError(nameof(FirstName), ex.Message);
+                OnPropertyChanged(nameof(ErrorMessages));
+            }
         }
 
         private bool CanSave()
@@ -184,11 +193,15 @@ namespace person_wpf_demo.ViewModels
         {
             if (firstName.Empty())
             {
-                AddError(propertyName, "First name is required.");
+                AddError(propertyName, "Le prénom est requis.");
             }
             else if (firstName.Length < 2)
             {
-                AddError(propertyName, "First name must contain at least 2 characters.");
+                AddError(propertyName, "Le prénom doit contenir au moins 2 caractères.");
+            }
+            else if (!Regex.IsMatch(firstName, "^[a-zA-Z]+$"))
+            {
+                AddError(propertyName, "Le prénom doit contenir uniquement des caractères alphabétiques.");
             }
         }
 
@@ -196,11 +209,15 @@ namespace person_wpf_demo.ViewModels
         {
             if (lastName.Empty())
             {
-                AddError(propertyName, "Last name is required.");
+                AddError(propertyName, "Le nom de famille est requis.");
             }
             else if (lastName.Length < 2)
             {
-                AddError(propertyName, "Last name must contain at least 2 characters.");
+                AddError(propertyName, "Le nom de famille doit contenir au moins 2 caractères.");
+            }
+            else if (!Regex.IsMatch(lastName, "^[a-zA-Z]+$"))
+            {
+                AddError(propertyName, "Le nom de famille doit contenir uniquement des caractères alphabétiques.");
             }
         }
 
@@ -208,7 +225,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (dateOfBirth == DateTime.MinValue)
             {
-                AddError(propertyName, "Birth date is required.");
+                AddError(propertyName, "La date de naissance est requise.");
             }
         }
 
@@ -216,7 +233,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (street.Empty())
             {
-                AddError(propertyName, "Street is required.");
+                AddError(propertyName, "La rue est requise.");
             }
         }
 
@@ -224,7 +241,7 @@ namespace person_wpf_demo.ViewModels
         {
             if (city.Empty())
             {
-                AddError(propertyName, "City is required.");
+                AddError(propertyName, "La ville est requise.");
             }
         }
 
@@ -232,13 +249,13 @@ namespace person_wpf_demo.ViewModels
         {
             if (postalCode.Empty())
             {
-                AddError(propertyName, "Postal code is required.");
+                AddError(propertyName, "Le code postal est requis.");
             }
         }
 
         private void AddUnknownError(string propertyName)
         {
-            AddError(propertyName, "An unknown error occurred.");
+            AddError(propertyName, "Une erreur inconnue s'est produite.");
         }
     }
 }

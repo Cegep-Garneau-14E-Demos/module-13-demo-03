@@ -246,6 +246,73 @@ namespace person_wpf_demo_tests
 
             Assert.That(_viewModel.HasErrors, Is.True);
         }
+
+        [Test]
+        public void Setting_first_name_with_numbers_adds_validation_error()
+        {
+            _viewModel.FirstName = "John123";
+
+            Assert.That(_viewModel.HasErrors, Is.True);
+        }
+
+        [Test]
+        public void Setting_last_name_with_numbers_adds_validation_error()
+        {
+            _viewModel.LastName = "Doe456";
+
+            Assert.That(_viewModel.HasErrors, Is.True);
+        }
+
+        [Test]
+        public void Setting_first_name_with_spaces_adds_validation_error()
+        {
+            _viewModel.FirstName = "Jean Paul";
+
+            Assert.That(_viewModel.HasErrors, Is.True);
+        }
+
+        [Test]
+        public void Setting_last_name_with_spaces_adds_validation_error()
+        {
+            _viewModel.LastName = "Von Doe";
+
+            Assert.That(_viewModel.HasErrors, Is.True);
+        }
+
+        [Test]
+        public void Save_command_cannot_execute_when_first_name_contains_numbers()
+        {
+            _viewModel.FirstName = "John123";
+            _viewModel.LastName = "Doe";
+            _viewModel.DateOfBirth = new DateTime(1990, 1, 1);
+            _viewModel.Street = "Candy Lane";
+            _viewModel.City = "North Pole";
+            _viewModel.PostalCode = "H0H0H0";
+
+            bool canExecute = _viewModel.SaveCommand.CanExecute(null);
+
+            Assert.That(canExecute, Is.False);
+        }
+
+        [Test]
+        public void Save_with_invalid_name_that_passes_viewmodel_validation_is_caught_by_service()
+        {
+            _viewModel.FirstName = "John";
+            _viewModel.LastName = "Doe";
+            _viewModel.DateOfBirth = new DateTime(1990, 1, 1);
+            _viewModel.Street = "Candy Lane";
+            _viewModel.City = "North Pole";
+            _viewModel.PostalCode = "H0H0H0";
+
+            _personServiceMock
+                .Setup(service => service.Add(It.IsAny<Person>()))
+                .Throws(new ArgumentException("Service validation failed"));
+
+            _viewModel.SaveCommand.Execute(null);
+
+            _navigationServiceMock.Verify(service => service.NavigateTo<PersonsViewModel>(It.IsAny<object[]>()), Times.Never);
+            Assert.That(_viewModel.HasErrors, Is.True);
+        }
     }
 }
 

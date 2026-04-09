@@ -12,6 +12,13 @@ namespace person_wpf_demo.ViewModels
         private readonly IAddressService _addressService;
         private Person _selectedPerson;
 
+        private readonly Dictionary<string, string> _fieldNames = new()
+        {
+            { nameof(Street), "La rue" },
+            { nameof(City), "La ville" },
+            { nameof(PostalCode), "Le code postal" }
+        };
+
         public NewAddressViewModel(INavigationService navigationService, IAddressService addressService)
         {
             _navigationService = navigationService;
@@ -97,7 +104,8 @@ namespace person_wpf_demo.ViewModels
             ClearErrors(propertyName);
             if (string.IsNullOrEmpty(value))
             {
-                AddError(propertyName, $"{propertyName} is required.");
+                string fieldName = _fieldNames.GetValueOrDefault(propertyName, propertyName);
+                AddError(propertyName, $"{fieldName} est requis.");
             }
             OnPropertyChanged(nameof(ErrorMessages));
         }
