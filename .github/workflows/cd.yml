@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - run: dotnet restore personw_pf_demo.sln
+      - run: dotnet restore personw_wpf_demo.sln
       - run: dotnet build person_wpf_demo.sln --no-restore --configuration Release
       - run: dotnet test person_wpf_demo_tests/person_wpf_demo_tests.csproj --verbosity normal
 
