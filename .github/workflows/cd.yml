@@ -38,14 +38,16 @@ jobs:
         --self-contained true
         --output publish
 
-    - name: Create ZIP archive
-      run: Compress-Archive -Path publish/* -DestinationPath person_wpf_demo.zip
+    - name: Generate installer with Inno Setup
+      uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
+      with:
+        path: installer/setup.iss
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
         name: Release ${{ github.ref_name }}
         tag_name: ${{ github.ref_name }}
-        files: person_wpf_demo.zip
+        files: installer/setup.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
