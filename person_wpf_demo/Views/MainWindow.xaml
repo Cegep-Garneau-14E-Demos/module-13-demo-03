@@ -8,11 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="0.8*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <StackPanel Grid.Row="0">
             <Button Content="Personnes"
                     Margin="10"
                     Height="25"
@@ -22,6 +26,13 @@
                     Height="25"
                     Command="{Binding NavigateToNewPersonViewCommand}"/>
         </StackPanel>
-        <ContentControl Grid.Column="1" Content="{Binding NavigationService.CurrentView}"></ContentControl>
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding NavigationService.CurrentView}"></ContentControl>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
+            Text="{Binding AppVersionNumber}"
+            FontSize="10"
+            Foreground="Gray"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="10" />
     </Grid>
 </Window>

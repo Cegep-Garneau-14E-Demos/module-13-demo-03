@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using person_wpf_demo.Models;
@@ -11,6 +12,11 @@ namespace person_wpf_demo.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        public string? AppVersionNumber
+        {
+            get => Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+        }
+
         private INavigationService _navigationService;
 
         public INavigationService NavigationService
@@ -35,4 +41,3 @@ namespace person_wpf_demo.ViewModels
         }
     }
 }
-
